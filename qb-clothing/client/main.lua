@@ -312,7 +312,7 @@ Citizen.CreateThread(function()
                                     customCamLocation = Config.ClothingRooms[k].cameraLocation
                                     gender = "male"
                                         openMenu({
-                                            {menu = "roomOutfits", label = "Outfits", selected = true, outfits = Config.Outfits[PlayerData.job.name][gender]},
+                                            {menu = "roomOutfits", label = "Outfits", selected = true, outfits = Config.Outfits[ESX.PlayerData.job.name][gender]},
                                             {menu = "character", label = "Character", selected = false},
                                             {menu = "accessoires", label = "Accessoires", selected = false}
                                         })
