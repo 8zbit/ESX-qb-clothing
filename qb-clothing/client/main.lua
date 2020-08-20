@@ -311,11 +311,14 @@ Citizen.CreateThread(function()
                                 if IsControlJustPressed(0, Keys["E"]) then
                                     customCamLocation = Config.ClothingRooms[k].cameraLocation
                                     gender = "male"
+                                    ESX.TriggerServerCallback('qb-clothing:server:getOutfits', function(result)
                                         openMenu({
                                             {menu = "roomOutfits", label = "Outfits", selected = true, outfits = Config.Outfits[ESX.PlayerData.job.name][gender]},
+                                            {menu = "myOutfits", label = "My Outfits", selected = false, outfits = result},
                                             {menu = "character", label = "Character", selected = false},
                                             {menu = "accessoires", label = "Accessoires", selected = false}
                                         })
+                                    end)
                                 end
                             end
                         end
@@ -332,6 +335,15 @@ Citizen.CreateThread(function()
 
         Citizen.Wait(3)
     end
+end)
+
+RegisterNetEvent('qb-clothing:client:openOutfitMenu')
+AddEventHandler('qb-clothing:client:openOutfitMenu', function()
+    ESX.TriggerServerCallback('qb-clothing:server:getOutfits', function(result)
+        openMenu({
+            {menu = "myOutfits", label = "My Outfits", selected = true, outfits = result},
+        })
+    end)
 end)
 
 RegisterNUICallback('selectOutfit', function(data)
