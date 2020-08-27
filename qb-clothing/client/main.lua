@@ -1032,7 +1032,6 @@ end)
 function SaveSkin()
 	local model = GetEntityModel(GetPlayerPed(-1))
     clothing = json.encode(skinData)
-    TriggerServerEvent("qb-clothing:delSkin")
 	TriggerServerEvent("qb-clothing:saveSkin", model, clothing)
 end
 
