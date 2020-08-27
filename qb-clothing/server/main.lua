@@ -23,26 +23,12 @@ AddEventHandler('qb-clothing:saveSkin', function(model, skin)
     local src = source
     local Player = ESX.GetPlayerFromId(src)
 
-    if model ~= nil and skin ~= nil then 
         MySQL.Async.execute('DELETE FROM playerskins WHERE `citizenid` = @identifier',
         {
 		    ['@identifier'] = Player.identifier
 	    })
         MySQL.Async.fetchAll("INSERT INTO `playerskins` (`citizenid`, `model`, `skin`, `active`) VALUES ('"..Player.getIdentifier().."', '"..model.."', '"..skin.."', 1)")
-    end
-end)
-
-RegisterServerEvent("qb-clothing:delSkin")
-AddEventHandler('qb-clothing:delSkin', function(model, skin)
-    local src = source
-    local Player = ESX.GetPlayerFromId(src)
-
-    if model ~= nil and skin ~= nil then 
-        MySQL.Async.execute('DELETE FROM `playerskins` WHERE `citizenid` = @identifier',
-        {
-		    ['@identifier'] = Player.identifier
-	    })
-    end
+        
 end)
 
 RegisterServerEvent("qb-clothes:loadPlayerSkin")
